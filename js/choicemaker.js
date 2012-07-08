@@ -35,7 +35,7 @@ $(function() {
         }
       }
 
-      if (indentedParts.length === 0 || $.trim(indentedParts[0]).length === 0) {
+      if (!indentedParts || indentedParts.length === 0 || $.trim(indentedParts[0]).length === 0) {
         return;
       }
 

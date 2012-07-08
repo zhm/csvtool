@@ -59,7 +59,7 @@ $(function() {
         } while (diff--);
 
         if (!theParent)
-          theParent = currentNode;
+          theParent = classificationSet;
         else
           theParent = theParent.parent;
 

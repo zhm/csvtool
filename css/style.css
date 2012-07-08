@@ -1,0 +1,29 @@
+
+.brand {
+  margin-left: 0px !important;
+}
+
+.left {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  right: 50%;
+  bottom: 0;
+}
+
+.right {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  left: 51%;
+  bottom: 0;
+}
+
+.right-text, .left-text {
+  width: 99%;
+  height: 98%;
+}
+
+.right-text {
+  font-family: monospace;
+}

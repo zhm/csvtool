@@ -19,6 +19,9 @@ $(function() {
     _.each(lines, function(line) {
       line = $.trim(line);
 
+      if (line.length === 0)
+        return;
+
       var parts = line.split(',');
       var indent = 0;
       var indentedParts;
@@ -52,11 +55,11 @@ $(function() {
         children.push(currentNode);
       } else if (indent < currentIndent) {
         var diff = (currentIndent - indent);
-        var theParent = null;
+        var theParent = currentNode;
 
         do {
-          theParent = currentNode.parent;
-        } while (diff--);
+          theParent = theParent.parent;
+        } while (--diff);
 
         if (!theParent)
           theParent = classificationSet;

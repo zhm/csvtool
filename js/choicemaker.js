@@ -45,6 +45,7 @@ $(function() {
       var value = $.trim(parts.length > 1 && $.trim(parts[1]).length > 0 ? parts[1] : parts[0]);
 
       if (indent > currentIndent) {
+        // a new level of nesting needs to be created
         var children = currentNode.child_classifications || currentNode.items;
         currentNode = {
           parent: currentNode,
@@ -54,6 +55,7 @@ $(function() {
         };
         children.push(currentNode);
       } else if (indent < currentIndent) {
+        // reached the end of a level of nesting, walk back up to find out which level of nesting the line is at
         var diff = (currentIndent - indent);
         var theParent = currentNode;
 
@@ -78,7 +80,9 @@ $(function() {
           children.push(currentNode);
         }
       } else {
+        // the line is the same as the last, no change in hierarchy
         var children = currentNode.parent.child_classifications || currentNode.parent.items;
+
         currentNode = {
           parent: currentNode.parent,
           label: label,
@@ -92,7 +96,8 @@ $(function() {
       currentIndent = indent;
     });
 
-    var withoutParents = {};
+    var withoutCircularReferences = {};
+
     var recurse = function(items) {
       var result = [];
       _.each(items, function(item) {
@@ -105,9 +110,11 @@ $(function() {
       return result;
     };
 
-    withoutParents.items = recurse(classificationSet.items);
+    withoutCircularReferences.name = classificationSet.name;
+    withoutCircularReferences.description = classificationSet.description;
+    withoutCircularReferences.items = recurse(classificationSet.items);
 
-    $('.right-text').html(JSON.stringify(withoutParents, null, '  '));
+    $('.right-text').html(JSON.stringify(withoutCircularReferences, null, '  '));
   };
 
   ChoiceMaker.convert = function() {

@@ -1,3 +1,3 @@
-# Choice Maker for Fulcrum
+# CSV Tool for Fulcrum
 
-This is a little app to convert CSV format to Fulcrum choice lists.
+This is a little app to convert CSV format to Fulcrum classification sets.

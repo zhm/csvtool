@@ -117,6 +117,43 @@ $(function() {
     $('.right-text').html(JSON.stringify(withoutCircularReferences, null, '  '));
   };
 
+  ClassMaker.convertToCSV = function() {
+    source = $('.right-text').val();
+
+    if (!source) {
+      $('.left-text').html('');
+      return;
+    }
+
+    try {
+      json = JSON.parse(source);
+    } catch (ex) {
+      alert('There\'s an error in the JSON.');
+      return;
+    }
+
+    var eachLevel = function(elements, depth) {
+      var prefix = '';
+      for (var i = 0; i < depth; ++i)
+        prefix += ',';
+
+      var lines = [];
+
+      for (var i = 0; i < elements.length; ++i) {
+        lines.push(prefix + (elements[i].label || '') + ',' + (elements[i].value || ''));
+        if (elements[i].child_classifications && elements[i].child_classifications.length > 0) {
+          lines = lines.concat(eachLevel(elements[i].child_classifications, depth + 1));
+        }
+      }
+
+      return lines;
+    }
+
+    csv = eachLevel(json.items, 0);
+
+    $('.left-text').html(csv.join('\n'));
+  }
+
   ChoiceMaker.convert = function() {
     source = $('.left-text').val();
 
@@ -152,7 +189,9 @@ $(function() {
 
   $('.left-text').keyup(function() {
     ClassMaker.convert();
-   // ChoiceMaker.convert();
+  });
+  $('.right-text').keyup(function() {
+    ClassMaker.convertToCSV();
   });
 });
 

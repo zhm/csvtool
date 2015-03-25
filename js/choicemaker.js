@@ -127,6 +127,9 @@ $(function() {
 
     try {
       json = JSON.parse(source);
+      if (json.classification_set) {
+        json = json.classification_set;
+      }
     } catch (ex) {
       alert('There\'s an error in the JSON.');
       return;
@@ -147,12 +150,12 @@ $(function() {
       }
 
       return lines;
-    }
+    };
 
     csv = eachLevel(json.items, 0);
 
     $('.left-text').html(csv.join('\n'));
-  }
+  };
 
   ChoiceMaker.convert = function() {
     source = $('.left-text').val();
@@ -194,4 +197,3 @@ $(function() {
     ClassMaker.convertToCSV();
   });
 });
-

@@ -1,3 +1,6 @@
+body {
+  overflow: hidden;
+}
 
 .brand {
   margin-left: 0px !important;
@@ -9,6 +12,7 @@
   left: 10px;
   right: 50%;
   bottom: 0;
+  overflow: auto;
 }
 
 .right {
@@ -17,11 +21,12 @@
   right: 10px;
   left: 51%;
   bottom: 0;
+  overflow: auto;
 }
 
 .right-text, .left-text {
-  width: 99%;
-  height: 98%;
+  width: 98%;
+  height: 97%;
 }
 
 .right-text {

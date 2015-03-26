@@ -6,7 +6,7 @@ $(function() {
     source = $('.left-text').val();
 
     if (!source) {
-      $('.right-text').html('');
+      $('.right-text').val('');
       return;
     }
 
@@ -114,14 +114,14 @@ $(function() {
     withoutCircularReferences.description = classificationSet.description;
     withoutCircularReferences.items = recurse(classificationSet.items);
 
-    $('.right-text').html(JSON.stringify(withoutCircularReferences, null, '  '));
+    $('.right-text').val(JSON.stringify(withoutCircularReferences, null, '  '));
   };
 
   ClassMaker.convertToCSV = function() {
     source = $('.right-text').val();
 
     if (!source) {
-      $('.left-text').html('');
+      $('.left-text').val('');
       return;
     }
 
@@ -154,14 +154,14 @@ $(function() {
 
     csv = eachLevel(json.items, 0);
 
-    $('.left-text').html(csv.join('\n'));
+    $('.left-text').val(csv.join('\n'));
   };
 
   ChoiceMaker.convert = function() {
     source = $('.left-text').val();
 
     if (!source) {
-      $('.right-text').html('');
+      $('.right-text').val('');
       return;
     }
 
@@ -187,7 +187,7 @@ $(function() {
       choices: choices
     };
 
-    $('.right-text').html(JSON.stringify(choiceList, null, '  '));
+    $('.right-text').val(JSON.stringify(choiceList, null, '  '));
   };
 
   $('.left-text').keyup(function() {
